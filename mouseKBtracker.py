@@ -17,7 +17,7 @@ layout = [
     [sg.Button('Move to Center', key = '_btnCenter_', size=(15,3)), sg.Exit(size=(15,3))]
 ]
 
-window = sg.Window('MouseNow.py', return_keyboard_events=True, use_default_focus=False).Layout(layout)
+window = sg.Window('mouseKBtracker.py by JZ', return_keyboard_events=True, use_default_focus=False).Layout(layout)
 x1, y1 = pyautogui.size()
 
 while True:
