@@ -2,7 +2,7 @@
 Some test projects I do for fun. May not work.
 
 <ol>
-  <li><a href = 'https://github.com/JingzOoi/JZs-Test-Projects/tree/master#mousekbtrackerpy'>mouseKBtracker.py</a></li>
+  <li><a href = '#mousekbtrackerpy'>mouseKBtracker.py</a></li>
   <li><a href = '#nineLetterWordC.py'>nineLetterWordC.py</a></li>
   <li><a href = '#scrabbleSearcher.py'>scrabbleSearcher.py</a></li>
   <li><a href = '#wordPuddle.py'>wordPuddle.py</a></li>
