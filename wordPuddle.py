@@ -11,19 +11,14 @@ import itertools, requests, timeit
 
 print('\nConnecting to wordlist...')
 
-url = 'http://www.mieliestronk.com/corncob_lowercase.txt' # online source for wordlist
+url = 'https://raw.githubusercontent.com/dwyl/english-words/master/words.txt' # online source for wordlist
 page = requests.get(url)
 page.raise_for_status()
 
-wordList = []
-
 # splits up text in source into a list of words
-s1 = page.text.split('\n')
-for s2 in s1:
-    s2.strip('\r')
-    wordList.append(s2)
+wordList = page.text.lower().split()
 
-hand = input('Connected to wordlist. \nInsert your Hand here: ')
+hand = input('Connected to wordlist. \nInsert your Hand here: ').lower()
 
 # checks if the Hand has an odd length
 if len(hand) % 2 != 1:
@@ -45,7 +40,7 @@ for count in range(4, len(hand)+1):
     for comb in itertools.permutations(hand, count):
         combination = ''.join(comb)
         i += 1
-        if (combination + '\r' in wordList) and (iLetter in combination) and (combination not in validList):
+        if (combination in wordList) and (iLetter in combination) and (combination not in validList):
             validness = 'Valid'
             validList.append(combination)
         else:

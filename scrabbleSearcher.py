@@ -36,17 +36,14 @@ LETTER_VALUES = {"A": 1,
 
 print('\nConnecting to wordlist...')
 
-url = 'http://www.mieliestronk.com/corncob_lowercase.txt' # online source for wordlist
+url = 'https://raw.githubusercontent.com/dwyl/english-words/master/words.txt' # online source for wordlist
 page = requests.get(url)
 page.raise_for_status()
 
-wordList = []
+wordList = page.text.lower().split()
 
 # splits up text in source into a list of words
-s1 = page.text.split('\n')
-for s2 in s1:
-    s2.strip('\r')
-    wordList.append(s2)
+
 
 hand = input('Connected to wordlist. \nInsert your Hand here: ').lower()
 
@@ -63,7 +60,7 @@ for count in range(2, len(hand)+1):
         for letter in comb:
             score += LETTER_VALUES[letter.upper()]
         combination = ''.join(comb)
-        if (combination + '\r' in wordList) and (combination not in validList):
+        if (combination in wordList) and (combination not in validList):
             validness = 'Valid'
             validList[combination] = score
         else:
