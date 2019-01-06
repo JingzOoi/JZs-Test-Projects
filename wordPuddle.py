@@ -47,7 +47,7 @@ for count in range(4, len(hand)+1):
             validness = 'Invalid'
 
         # words to be printed when operations are running. Mostly for visual effects.
-        load = '[{}] Generated word {}: {}'.format(i, combination, validness)
+        load = '[{}] Generated word {}: {} | {} valid words found.'.format(i, combination, validness.rjust(7), len(validList))
         print(load, end='')
         print('\b'*len(load), end='', flush=True)
 
