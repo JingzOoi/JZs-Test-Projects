@@ -3,11 +3,13 @@
 # Word game: Given a string of a length of an odd number, the player must form valid words, each containing the middlemost letter.
 # Usage: [1] Run the script: >>> python3 wordPuddle.py
 #        [2] When prompted, enter your Hand. 
-# Note: the longer your Hand is, the longer it takes to process. 
+# Note: the longer your Hand is, the longer it takes to process, but it differs with device specs.
 # For reference, a 9-letter word took 1701 seconds to be run for me with 985,824 iterations.
 # Additional modules: requests
 
 import itertools, requests, timeit
+
+print('\nConnecting to wordlist...')
 
 url = 'http://www.mieliestronk.com/corncob_lowercase.txt' # online source for wordlist
 page = requests.get(url)
@@ -21,7 +23,7 @@ for s2 in s1:
     s2.strip('\r')
     wordList.append(s2)
 
-hand = input('\nConnected to wordlist. \nInsert your Hand here: ')
+hand = input('Connected to wordlist. \nInsert your Hand here: ')
 
 # checks if the Hand has an odd length
 if len(hand) % 2 != 1:
@@ -60,4 +62,4 @@ print('\n-----Matching operations ended-----\n\n-----Displaying results-----\nVa
 for valid in validList:
     c += 1
     print('[{}] '.format(c) + valid)
-print('-----End of results-----\n\nOut of {} iterations created, {} are valid. \nA total of {} seconds was used.\n'.format(i, c, round(endTime-startTime, 3)))
+print('-----End of results-----\n\nOut of {} iterations created, {} are valid. \nA total of {} seconds were used.\n'.format(i, c, round(endTime-startTime, 3)))

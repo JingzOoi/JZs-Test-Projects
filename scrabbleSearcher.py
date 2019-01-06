@@ -1,12 +1,11 @@
 #! python3
 # scrabbleSearcher.py: Cheat at Scrabble with minimal effort!
-# Usage: [1] Run the script: python scrabbleSearcher.py
+# Usage: [1] Run the script: python scrabbleSearcher.py. When prompted, enter your Hand.
 #        [2] The output shows a list of the possible valid combinations and the scores they take. (No special tiles)
 #        [3] DON'T TALK ABOUT HOW THERE'S NO BLANK CARD AHHHHHHHH
-# Requirements: @adambom's dictionary json file at https://github.com/adambom/dictionary
-# Notes: Repetition of words in the list should be normal because different letter recognition, etc.
+# Requirements: requests
 
-import itertools, json
+import itertools, requests, timeit
 
 LETTER_VALUES = {"A": 1,
                  "B": 3,
@@ -35,25 +34,51 @@ LETTER_VALUES = {"A": 1,
                  "Y": 4,
                  "Z": 10}
 
-word = input('Insert your hand here: ').upper()
+print('\nConnecting to wordlist...')
 
-with open('dictionary.json', encoding='utf-8') as json_data:
-    dictionary = json.load(json_data)
+url = 'http://www.mieliestronk.com/corncob_lowercase.txt' # online source for wordlist
+page = requests.get(url)
+page.raise_for_status()
+
+wordList = []
+
+# splits up text in source into a list of words
+s1 = page.text.split('\n')
+for s2 in s1:
+    s2.strip('\r')
+    wordList.append(s2)
+
+hand = input('Connected to wordlist. \nInsert your Hand here: ').lower()
+
+# starts timer
+print('\nStarting operations. Timer starts now.')
+startTime = timeit.default_timer()
+
 
 i = 0
-for count in range(2,8):
-    for comb in itertools.permutations(word, count):
+validList = {}
+for count in range(2, len(hand)+1):
+    for comb in itertools.permutations(hand, count):
         score = 0
         for letter in comb:
-            score += LETTER_VALUES[letter]
-        
+            score += LETTER_VALUES[letter.upper()]
         combination = ''.join(comb)
+        if (combination + '\r' in wordList) and (combination not in validList):
+            validness = 'Valid'
+            validList[combination] = score
+        else:
+            validness = 'Invalid'
+        i += 1
 
-        try:
-            definition = dictionary[combination]
-            print('[{}] {}'.format(score, combination))
-            i += 1
-        except KeyError:
-            continue
+        # words to be printed when operations are running. Mostly for visual effects.
+        load = '[{}] Generated word {}: {}'.format(i, combination, validness)
+        print(load, end='')
+        print('\b'*len(load), end='', flush=True)
 
-print('A total of %d combinations are available.' % i)
+endTime = timeit.default_timer()
+c = 0
+print('\n-----Matching operations ended-----\n\n-----Displaying results-----\nValid words:')
+for valid in validList:
+    c += 1
+    print('[{}] {} - {}'.format(c, str(validList[valid]).rjust(2), valid))
+print('-----End of results-----\n\nOut of {} iterations created, {} are valid. \nA total of {} seconds were used.\n'.format(i, c, round(endTime-startTime, 3)))

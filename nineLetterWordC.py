@@ -37,6 +37,8 @@ try:
     print('There are% d possible answers.\nLaunching browser...' % len(answerList))
 
     driver = webdriver.Firefox()
+    driver.set_window_position(0, 0)
+    driver.set_window_size(900, 1000)
     driver.get(url)
 
     guess = driver.find_element_by_class_name('guess')
