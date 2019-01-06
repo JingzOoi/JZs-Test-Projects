@@ -18,13 +18,13 @@ for s2 in s1:
     s2.strip('\r')
     wordList.append(s2)
 
-hand = input('Insert your Hand here: ')
+hand = input('\nInsert your Hand here: ')
 
 if len(hand) % 2 != 1:
     print('The Hand should be of a length with an odd number. Check your Hand and try again.')
     exit()
 
-print('Starting operations. Timer starts now.')
+print('\nStarting operations. Timer starts now.')
 startTime = timeit.default_timer()
 
 iLetter = hand[len(hand)//2]
@@ -47,8 +47,8 @@ for count in range(4, len(hand)+1):
 
 endTime = timeit.default_timer()
 c = 0
-print('\n-----Matching operations ended-----\n-----Displaying results-----\nValid words:')
+print('\n-----Matching operations ended-----\n\n-----Displaying results-----\nValid words:')
 for valid in validList:
     c += 1
     print('[{}] '.format(c) + valid)
-print('-----End of results-----\nOut of {} iterations created, {} are valid. \nA total of {} seconds was used.'.format(i, c, round(endTime-startTime, 3)))
+print('-----End of results-----\n\nOut of {} iterations created, {} are valid. \nA total of {} seconds was used.\n'.format(i, c, round(endTime-startTime, 3)))
