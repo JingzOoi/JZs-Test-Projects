@@ -8,7 +8,11 @@ import requests, sys
 from bs4 import BeautifulSoup
 from selenium import webdriver
 
-url = 'https://nineletterword.tompaton.com/' + sys.argv[1]
+try:
+    url = 'https://nineletterword.tompaton.com/' + sys.argv[1]
+except IndexError:
+    print('Missing Argument! Make sure you pass your Hand as an argument.')
+    exit()
 
 if len(sys.argv[1]) == 9:
     print('Calculating...')
