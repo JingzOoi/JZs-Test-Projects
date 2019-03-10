@@ -34,4 +34,8 @@ Usage: <pre>loadingBar.loadingBar(maximumNumber, currentNumber, message='', star
 
 # checkIfPrime.py
 A module to check if prime.<br>
+<<<<<<< HEAD
 <pre>checkifPrime.isPrime(num)</pre> returns a True or False Boolean; <pre>checkifPrime.isPrimeInRange(startingNumber, endingNumber)</pre> returns a list of prime numbers in the specified range.
+=======
+<pre>checkifPrime.isPrime(num)</pre> returns a True or False Boolean; <pre>checkifPrime.isPrimeInRange(startingNumber, endingNumber)</pre> returns a list of prime numbers in the specified range.
+>>>>>>> 1353fb4555f73cbdc4c290a2ed8842f2463c8a4b
