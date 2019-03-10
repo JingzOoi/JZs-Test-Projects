@@ -25,6 +25,10 @@ def retrievedDataFromBiliBili():
     }
     return resultDict
 
+def initializeJSON(stat):
+    with open('kaguyaB.json', 'w') as f:
+        json.dump(stat, f)
+
 def writeToJSON(stat):
     with open('kaguyaB.json', 'r') as f:
         data = json.load(f)
@@ -58,6 +62,9 @@ def pastEntries():
 try:
     if sys.argv[1] == 'new' or sys.argv[1] == 'n':
         newEntry()
+    elif sys.argv[1] == 'init':
+        initializeJSON(retrievedDataFromBiliBili())
+        pastEntries()
     else:
         pastEntries()
 except IndexError:
