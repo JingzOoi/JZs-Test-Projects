@@ -40,7 +40,7 @@ def writeToJSON(stat):
 
 def constructTable():
     pt = prettytable.PrettyTable()
-    pt.field_names = ['Date', 'Time', 'Views', 'Following', 'Danmaku', 'Score', 'Raters']
+    pt.field_names = ['Date', 'Hour', 'Views', 'Following', 'Danmaku', 'Score', 'Raters']
 
     with open('kaguyaB.json', 'r') as f:
         data = json.load(f)
